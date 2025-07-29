@@ -1,47 +1,49 @@
-import express from "express";
-import cors from "cors";
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';  
+import dotenv from 'dotenv'; // load API key securely
+
+dotenv.config(); //  load .env variables
 
 const app = express();
-app.use(express.json());
-const corsOptions = {
-  origin: "*", // allow all any origin or specify
-  methods: ["GET" , "POST"],
-  credentials: true, // if you need to send cookies/auth headers
-};
+const PORT = process.env.PORT || 3000;
 
-app.use(cors(corsOptions));
+app.use(cors());  
+app.use(express.json()); 
 
+ 
+app.post('/api/generate-animation', async (req, res) => {
+  const { prompt } = req.body;  
 
-app.post("/api/test", (req, res) => {
-    const {propmt} = req.body
-    if(propmt?.includes("two balls")){
-    const jsCode = `
-       const circleA = Matter.Bodies.circle(150, 100, 20, {
-        restitution: 0.8,
-        render: { fillStyle: "#60a5fa" },
-      });
+  try {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'qwen/qwen3-coder:free',
+        messages: [
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.4,
+        max_tokens: 500
+      })
+    });
 
-      const circleB = Matter.Bodies.circle(250, 100, 30, {
-        restitution: 0.9,
-        render: { fillStyle: "#f472b6" },
-      });
+    if (!response.ok) throw new Error("Failed to fetch from OpenRouter");
 
-      const ground = Matter.Bodies.rectangle(200, 390, 400, 20, {
-        isStatic: true,
-        render: { fillStyle: "#6b7280" },
-      });
+    const data = await response.json();
+    res.json({ result: data.choices[0].message.content }); 
 
-      Matter.World.add(world, [circleA, circleB, ground]);
-    `;
-
-    res.json({ message: jsCode});
-    }
-    else{
-        res.json({message : " sorry we can't load this animation !"})
-    }
-  
+  } catch (err) {
+    console.error("Server error:", err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
-app.listen(3000, () => {
-  console.log("Backend running on http://localhost:3000");
-}); 
+
+app.listen(PORT, () => {
+  console.log(`server running on http://localhost:${PORT}`);
+});
