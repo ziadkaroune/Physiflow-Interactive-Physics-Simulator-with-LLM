@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import fetch from 'node-fetch';  
-import dotenv from 'dotenv'; // load API key securely
+import dotenv from 'dotenv'; 
 
 dotenv.config(); //  load .env variables
 

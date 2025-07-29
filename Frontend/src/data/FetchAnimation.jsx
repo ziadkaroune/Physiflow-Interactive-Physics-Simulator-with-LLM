@@ -9,10 +9,10 @@ const FetchAnimation = ({ inputAnimation }) => {
   const getAnimation = async () => {
     try {
       const reqScriptAnimation = BuildPrompt(inputAnimation);
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetch('http://localhost:3000/api/generate-animation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({propmpt : reqScriptAnimation})
+         body: JSON.stringify({prompt : reqScriptAnimation})
       });
       if (!response.ok) {
         throw new Error("error fetching data");
