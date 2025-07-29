@@ -4,7 +4,7 @@ import cors from "cors";
 const app = express();
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:5173", // frontend origin you want to allow
+  origin: "*", // allow all any origin or specify
   methods: ["GET" , "POST"],
   credentials: true, // if you need to send cookies/auth headers
 };
@@ -44,4 +44,4 @@ app.post("/api/test", (req, res) => {
 
 app.listen(3000, () => {
   console.log("Backend running on http://localhost:3000");
-});
+}); 
