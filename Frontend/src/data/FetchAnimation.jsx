@@ -11,27 +11,15 @@ const FetchAnimation = ({ inputAnimation }) => {
       const reqScriptAnimation = BuildPrompt(inputAnimation);
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
-        headers: { 
-          'Authorization': "Bearer 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",
-          'Content-Type': 'application/json' },
-         body: JSON.stringify({
-      model: 'qwen/qwen3-coder:free',
-      messages: [
-        {
-          role: 'user',
-          content: reqScriptAnimation ,
-        }
-      ],
-      temperature: 0.4,
-      max_tokens: 500
-    })
+        headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({propmpt : reqScriptAnimation})
       });
       if (!response.ok) {
         throw new Error("error fetching data");
       }
       const dataj = await response.json();
       
-      setData(dataj.choices[0].message.content);
+      setData(dataj.result);
       setError(false); 
     } catch (err) {
       setError(true); 
@@ -52,8 +40,6 @@ const FetchAnimation = ({ inputAnimation }) => {
   if(loading) return <h5>generating the animation . . .</h5>
   return (
     <div>
-    
-      
        <StaticModelMouvement data={data}/>
     </div>
   );
