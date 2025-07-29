@@ -58,7 +58,7 @@ function App() {
                       </select>
                       <h6 className='my-4 text-center'> or </h6>
                      <div className="flex w-full max-w-md mx-auto mt-6 gap-2">
-  <input
+  <textarea
     min={3}
     placeholder="Describe your animation"
     onChange={(e) => setInputAnimationT(e.target.value)}

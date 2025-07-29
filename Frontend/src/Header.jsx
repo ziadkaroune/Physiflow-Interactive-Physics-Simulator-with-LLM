@@ -6,7 +6,7 @@ return(
     <header>
       <nav className="flex justify-between items-center px-10 py-6 border-b border-purple-600">
         <div className="text-xl font-extrabold tracking-widest neon-text cursor-pointer">
-        PhysiFlow      
+        PHYSIFLOW     
          </div>
         <ul className="flex space-x-12 uppercase text-sm tracking-wide">
          
