@@ -47,15 +47,19 @@ function App() {
       <main className="flex-grow flex justify-center items-center">
         <div className="w-1/2  h-[80vh] flex items-center justify-center">
               <div className='w-1/2 '>
-                      <select
-                      onChange={(e)=>setSelectAnimationT(e.target.value)}
-                        className="w-full text-sm rounded-xl px-5 py-3  bg-gray-900 bg-opacity-70 border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 neon-input placeholder-purple-400 pr-4"
-                      >
-                        <option>choose animation</option>
-                        <option value="MouvementBalls">MouvementBalls - 2D</option>
-                          <option value="NewtonsCradle">NewtonsCradle - 2D</option>
-                          <option value="Pendulum">Pendulum - 2D</option>
-                      </select>
+                        <div className="relative w-full">
+            <select
+              onChange={(e) => setSelectAnimationT(e.target.value)}
+              className="appearance-none w-full text-sm rounded-xl px-5 py-3 pr-10 bg-gray-900 bg-opacity-70 border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 text-purple-100">
+              <option>choose animation</option>
+                    <option value="MouvementBalls">MouvementBalls - 2D</option>
+                    <option value="NewtonsCradle">NewtonsCradle - 2D</option>
+                    <option value="Pendulum">Pendulum - 2D</option>
+            </select>
+
+  <div className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-purple-300">
+    ▼
+  </div>  </div>
                       <h6 className='my-4 text-center'> or </h6>
                      <div className="flex w-full max-w-md mx-auto mt-6 gap-2">
   <textarea
