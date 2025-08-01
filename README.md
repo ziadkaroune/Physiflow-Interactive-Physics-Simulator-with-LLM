@@ -1,5 +1,5 @@
 # Interactive Physics Simulator with LLM-Based Scenario Scripting — **physiflow**
-![Physics Simulation](./images/physics-simulation.png)
+![Physics Simulation iimage](./images/physics-simulationi-img.png)
 ## Project Overview
 
 **Physiflow** is an interactive physics simulator that lets users describe physics scenarios in natural language, which are then rendered as interactive 2D animations using the Matter.js physics engine. Built with React and styled with Tailwind CSS, the simulator offers a responsive, user-friendly interface.
